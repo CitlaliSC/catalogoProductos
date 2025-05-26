@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="../assets/logo.webp" />
+  <link rel="stylesheet" href="/css/styles.css">
+  <script type="module" src="../scripts/products.js"></script>
+  <style>
+    .grid-layout {
+      display: grid;
+      grid-template-columns: 300px 1fr; /* izquierda fija, derecha flexible */
+      gap: 2rem;
+      align-items: start;
+    }
+
+    @media (max-width: 768px) {
+      .grid-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-section {
+      padding: 1.5rem;
+      border-radius: 8px;
+      color: white;
+    }
+
+    #productList {
+      display: grid;
+      gap: 1rem;
+    }
+  </style>
+  <title>Productos</title>
+</head>
+<body>
+  <main class="container">
+    <h1 style="text-align: center; color: white; margin-bottom: 2rem;">Administrador de Productos</h1>
+
+    <div class="grid-layout">
+      <!-- FORMULARIO A LA IZQUIERDA -->
+      <section class="form-section">
+        <h2>Agregar nuevo Producto</h2>
+
+        <label for="inpName">Nombre del Producto</label>
+        <input type="text" id="inpName" placeholder="Ej: Air Max Revolution" />
+
+        <label for="inpMarca">Marca</label>
+        <input type="text" id="inpMarca" placeholder="Ej: Puma" />
+
+        <label for="inpCategory">Categoría</label>
+        <input type="text" id="inpCategory" placeholder="Ej: Casuales" />
+
+        <label for="inpPrecio">Precio $</label>
+        <input type="number" id="inpPrecio" placeholder="149.99" />
+
+        <label style="margin-top: 1rem;">Tallas disponibles</label>
+        <div class="size-selector" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(50px, 1fr)); gap: 0.5rem;">
+          <!-- Tallas -->
+          <div><input type="checkbox" id="size35" class="size-checkbox" value="35" /><label for="size35" class="size-label">35</label></div>
+          <div><input type="checkbox" id="size36" class="size-checkbox" value="36" /><label for="size36" class="size-label">36</label></div>
+          <div><input type="checkbox" id="size37" class="size-checkbox" value="37" /><label for="size37" class="size-label">37</label></div>
+          <div><input type="checkbox" id="size38" class="size-checkbox" value="38" /><label for="size38" class="size-label">38</label></div>
+          <div><input type="checkbox" id="size39" class="size-checkbox" value="39" /><label for="size39" class="size-label">39</label></div>
+          <div><input type="checkbox" id="size40" class="size-checkbox" value="40" /><label for="size40" class="size-label">40</label></div>
+          <div><input type="checkbox" id="size41" class="size-checkbox" value="41" /><label for="size41" class="size-label">41</label></div>
+          <div><input type="checkbox" id="size42" class="size-checkbox" value="42" /><label for="size42" class="size-label">42</label></div>
+          <div><input type="checkbox" id="size43" class="size-checkbox" value="43" /><label for="size43" class="size-label">43</label></div>
+          <div><input type="checkbox" id="size44" class="size-checkbox" value="44" /><label for="size44" class="size-label">44</label></div>
+          <div><input type="checkbox" id="size45" class="size-checkbox" value="45" /><label for="size45" class="size-label">45</label></div>
+        </div>
+
+        <button type="button" id="btnAdd" style="margin-top: 1rem;">Agregar Producto</button>
+      </section>
+
+      <!-- PRODUCTOS A LA DERECHA -->
+      <section class="form-section">
+        <h2>Productos Agregados</h2>
+        <div id="productList"></div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
