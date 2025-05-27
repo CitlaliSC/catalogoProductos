@@ -12,8 +12,10 @@ const sizeCheckboxes = document.querySelectorAll(".size-checkbox");
 
 const btnAdd      = document.getElementById("btnAdd");
 const productList = document.getElementById("productList");
+const searchInput = document.getElementById("searchInput");
 
 let editingProductId = null;
+let allProducts = [];  // Aquí guardamos todos los productos para filtrar en memoria
 
 btnAdd.onclick = async () => {
   if (!inpName.value || !inpMarca.value || !inpCategory.value || !inpPrecio.value) {
@@ -29,7 +31,7 @@ btnAdd.onclick = async () => {
   } else {
     await createProduct();
   }
-  await displayProducts();
+  await loadAndDisplayProducts();
 };
 
 async function createProduct() {
@@ -37,7 +39,7 @@ async function createProduct() {
 
   const tallas = [...sizeCheckboxes]
     .filter(cb => cb.checked)
-    .map(cb   => cb.value);
+    .map(cb => cb.value);
 
   const product = {
     id,
@@ -60,7 +62,7 @@ async function createProduct() {
 async function updateProduct() {
   const tallas = [...sizeCheckboxes]
     .filter(cb => cb.checked)
-    .map(cb   => cb.value);
+    .map(cb => cb.value);
 
   const product = {
     id: editingProductId,
@@ -89,7 +91,7 @@ async function deleteProduct(prodID) {
 
   try {
     await deleteProductFromFirestore(prodID);
-    await displayProducts();
+    await loadAndDisplayProducts();
   } catch (error) {
     alert("Error al eliminar el producto.");
     console.error(error);
@@ -112,55 +114,70 @@ function fillFormForEdit(product) {
   editingProductId = product.id;
 }
 
-async function displayProducts() {
-  productList.innerHTML = "";  // Limpia antes
+function filterAndDisplayProducts(filterText) {
+  const lowerFilter = filterText.toLowerCase();
 
+  const filtered = allProducts.filter(p => 
+    p.name.toLowerCase().includes(lowerFilter) ||
+    p.marca.toLowerCase().includes(lowerFilter) ||
+    p.categoria.toLowerCase().includes(lowerFilter)
+  );
+
+  renderProductList(filtered);
+}
+
+function renderProductList(productsArray) {
+  productList.innerHTML = "";
+
+  if (!productsArray.length) {
+    productList.innerHTML = "<p>No hay productos para mostrar.</p>";
+    return;
+  }
+
+  productsArray.forEach((p) => {
+    const card = document.createElement("div");
+    card.className = "product-card";
+    card.style.padding = "5%";
+    card.style.color = "black";
+    card.innerHTML = `
+      <h3>${p.name}</h3>
+      <p><strong>Marca:</strong> ${p.marca}</p>
+      <p><strong>Categoría:</strong> ${p.categoria}</p>
+      <p><strong>Precio:</strong> $${p.precio.toFixed(2)}</p>
+      <p><strong>Tallas:</strong> ${p.tallas?.join(", ") || "-"}</p>
+      <button class="btnEdit" data-id="${p.id}">Editar</button>
+      <button class="btnDelete" data-id="${p.id}">Eliminar</button>
+    `;
+    productList.appendChild(card);
+  });
+
+  // Listeners para botones editar y eliminar
+  document.querySelectorAll(".btnDelete").forEach(btn =>
+    btn.addEventListener("click", e => deleteProduct(e.target.dataset.id))
+  );
+  document.querySelectorAll(".btnEdit").forEach(btn =>
+    btn.addEventListener("click", e => {
+      const productId = e.target.dataset.id;
+      const product = allProducts.find(p => p.id === productId);
+      if (product) fillFormForEdit(product);
+    })
+  );
+}
+
+async function loadAndDisplayProducts() {
   try {
-    const productsArray = await getProductsFromFirestore();
-    console.log("Productos obtenidos:", productsArray);
-
-    if (!productsArray.length) {
-      productList.innerHTML = "<p>No hay productos para mostrar.</p>";
-      return;
-    }
-
-    productsArray.forEach((p) => {
-      console.log("Producto:", p);
-      const card = document.createElement("div");
-      card.className = "product-card";
-      card.style.padding = "5%";
-      card.style.color = "black";
-      card.innerHTML = `
-        <h3>${p.name}</h3>
-        <p style="color: black;"><strong>Marca:</strong> ${p.marca}</p>
-        <p style="color: black;"><strong>Categoría:</strong> ${p.categoria}</p>
-        <p style="color: black;"><strong>Precio:</strong> $${p.precio.toFixed(2)}</p>
-        <p style="color: black;"><strong>Tallas:</strong> ${p.tallas?.join(", ") || "-"}</p>
-        <button class="btnEdit" data-id="${p.id}">Editar</button>
-        <button class="btnDelete" data-id="${p.id}">Eliminar</button>
-      `;
-      productList.appendChild(card);
-    });
-
-    // Añade listeners para botones
-    document.querySelectorAll(".btnDelete").forEach(btn =>
-      btn.addEventListener("click", e => deleteProduct(e.target.dataset.id))
-    );
-    document.querySelectorAll(".btnEdit").forEach(btn =>
-      btn.addEventListener("click", e => {
-        const productId = e.target.dataset.id;
-        const product = productsArray.find(p => p.id === productId);
-        if (product) fillFormForEdit(product);
-      })
-    );
-
+    allProducts = await getProductsFromFirestore();
+    filterAndDisplayProducts(searchInput.value.trim());
   } catch (error) {
     productList.innerHTML = "<p>Error cargando productos.</p>";
     console.error(error);
   }
 }
 
-
+// Evento para el input buscador
+searchInput.addEventListener("input", (e) => {
+  filterAndDisplayProducts(e.target.value.trim());
+});
 
 window.onload = async () => {
   if (!navigator.onLine) {
@@ -168,5 +185,5 @@ window.onload = async () => {
     productList.innerHTML = "<p>Sin conexión, no se pueden mostrar productos.</p>";
     return;
   }
-  await displayProducts();
+  await loadAndDisplayProducts();
 };
