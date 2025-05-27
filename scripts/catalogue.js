@@ -65,7 +65,6 @@ function renderProducts(products) {
 
     container.appendChild(productCard);
 
-    // Agregar evento para botón wishlist
     const btn = productCard.querySelector(".add-to-wishlist-btn");
     btn.addEventListener("click", () => addToWishlist(product));
   });
@@ -80,11 +79,11 @@ function filterProducts(filters) {
       product.marca.toLowerCase().includes(lowerSearch) ||
       product.categoria.toLowerCase().includes(lowerSearch);
 
+    const matchMarca = !filters.marca || product.marca === filters.marca;
     const matchCategoria = !filters.categoria || product.categoria === filters.categoria;
-    const matchColor = !filters.color || product.color === filters.color;
     const matchPrecio = product.precio <= filters.precioMax;
 
-    return matchSearch && matchCategoria && matchColor && matchPrecio;
+    return matchSearch && matchMarca && matchCategoria && matchPrecio;
   });
 }
 
@@ -185,6 +184,12 @@ function updateWishlistCount(count) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+  const filtroMarca = document.getElementById("inpMarca");
+  const filtroCategoria = document.getElementById("inpCategory");
+  const filtroPrecio = document.getElementById("inpPrecio");
+  const filtroBusqueda = document.getElementById("searchInput");
+  const precioValor = document.getElementById("precioValor");
+
   // Detectar usuario autenticado
   onAuthStateChanged(auth, user => {
     currentUser = user;
@@ -192,12 +197,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   await getProductsFromFirestore();
-
-  const filtroCategoria = document.getElementById("filter-category");
-  const filtroColor = document.getElementById("filter-color");
-  const filtroPrecio = document.getElementById("filter-precio");
-  const filtroBusqueda = document.getElementById("searchInput");
-  const precioValor = document.getElementById("precio-valor");
 
   function updatePrecioValor() {
     if (!precioValor || !filtroPrecio) return;
@@ -207,8 +206,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   function updateFilteredProducts() {
     const filters = {
       search: filtroBusqueda ? filtroBusqueda.value.trim() : "",
+      marca: filtroMarca ? filtroMarca.value : "",
       categoria: filtroCategoria ? filtroCategoria.value : "",
-      color: filtroColor ? filtroColor.value : "",
       precioMax: filtroPrecio ? parseFloat(filtroPrecio.value) : Number.MAX_VALUE,
     };
 
@@ -218,16 +217,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderProducts(filtered);
   }
 
+  if (filtroMarca) filtroMarca.addEventListener("change", updateFilteredProducts);
   if (filtroCategoria) filtroCategoria.addEventListener("change", updateFilteredProducts);
-  if (filtroColor) filtroColor.addEventListener("change", updateFilteredProducts);
   if (filtroPrecio) filtroPrecio.addEventListener("input", updateFilteredProducts);
   if (filtroBusqueda) filtroBusqueda.addEventListener("input", updateFilteredProducts);
 
   // Botón wishlist abre modal
-  document.querySelector(".wishlist-btn").addEventListener("click", openWishlist);
+  const wishlistBtn = document.querySelector(".wishlist-btn");
+  if (wishlistBtn) wishlistBtn.addEventListener("click", openWishlist);
 
   // Botón cerrar modal wishlist
-  document.querySelector(".close-btn").addEventListener("click", closeWishlist);
+  const closeBtn = document.querySelector(".close-btn");
+  if (closeBtn) closeBtn.addEventListener("click", closeWishlist);
 
   updatePrecioValor();
   renderProducts(allProducts);

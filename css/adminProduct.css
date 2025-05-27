@@ -1,4 +1,3 @@
-/* Reset y base */
 * {
     margin: 0;
     padding: 0;
@@ -45,7 +44,7 @@ body {
     flex-direction: column;
     gap: 1.5rem;
     transition: all 0.3s ease;
-    color: #4a5568; /* override del color blanco para texto */
+    color: #4a5568;
 }
 
 .form-section:hover {
@@ -73,8 +72,8 @@ body {
     color: #4a5568;
 }
 
-/* Inputs */
-.form-section input {
+/* Inputs normales (sin checkbox ni radio) */
+.form-section input:not([type="checkbox"]):not([type="radio"]) {
     padding: 1rem;
     border: 2px solid rgba(102, 126, 234, 0.2);
     border-radius: 12px;
@@ -84,17 +83,92 @@ body {
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(5px);
     color: #333;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
-.form-section input:focus {
+.form-section input:not([type="checkbox"]):not([type="radio"]):focus {
     border-color: #667eea;
     background: rgba(255, 255, 255, 0.95);
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
     transform: translateY(-2px);
 }
 
-.form-section input:hover {
+.form-section input:not([type="checkbox"]):not([type="radio"]):hover {
     border-color: rgba(102, 126, 234, 0.4);
+}
+
+/* Selects (desplegables) */
+.form-section select {
+    padding: 1rem;
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    border-radius: 12px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    color: #333;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236676ea' viewBox='0 0 16 16'%3e%3cpath d='M4.646 6.646a.5.5 0 0 1 .708 0L8 9.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    cursor: pointer;
+}
+
+.form-section select:focus {
+    border-color: #667eea;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+.form-section select:hover {
+    border-color: rgba(102, 126, 234, 0.4);
+}
+
+/* Checkbox y Radio */
+.form-section input[type="checkbox"],
+.form-section input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    position: relative;
+}
+
+/* Radios circulares */
+.form-section input[type="radio"] {
+    border-radius: 50%;
+}
+
+/* Focus para checkbox y radio (mismo estilo que select) */
+.form-section input[type="checkbox"]:focus,
+.form-section input[type="radio"]:focus {
+    border-color: #667eea;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+    outline: none;
+}
+
+/* Opcional: cambio visual cuando están checkeados */
+.form-section input[type="checkbox"]:checked {
+    background-color: #667eea;
+    border-color: #667eea;
+}
+
+.form-section input[type="radio"]:checked {
+    background-color: #667eea;
+    border-color: #667eea;
 }
 
 /* Botón */
@@ -137,22 +211,22 @@ body {
     transform: translateY(-1px);
 }
 
-/* El contenedor de productos listados */
+/* Contenedor de productos listados */
 #productList {
     display: flex;
-    flex-wrap: wrap;  /* permite que los items bajen a la siguiente fila */
+    flex-wrap: wrap;
     gap: 1rem;
-    justify-content: flex-start; /* alineados a la izquierda */
+    justify-content: flex-start;
 }
 
-/* El tamaño y diseño del selector de tallas ya está inline, pero podrías pasarlo acá */
+/* Selector de tallas */
 .size-selector {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
     gap: 0.5rem;
 }
 
-/* El título principal h1 */
+/* Título principal h1 */
 h1 {
     text-align: center;
     color: white;

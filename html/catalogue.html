@@ -33,30 +33,37 @@
       <input type="text" id="searchInput" placeholder="Buscar productos..." />
     </div>
     <div class="filter-grid">
-      <div class="filter-item">
-        <label for="filter-category">Categoría</label>
-        <select id="filter-category">
-          <option value="">Todas</option>
-          <option value="camisas">Camisas</option>
-          <option value="gorras">Gorras</option>
-          <option value="tazas">Tazas</option>
+      <div class="filter-group">
+        <label for="inpMarca">Marca</label>
+        <select id="inpMarca">
+          <option value="">-- Selecciona Marca --</option>
+          <option value="Nike">Nike</option>
+          <option value="Adidas">Adidas</option>
+          <option value="Puma">Puma</option>
+          <option value="Reebok">Reebok</option>
+          <option value="New Balance">New Balance</option>
         </select>
       </div>
-      <div class="filter-item">
-        <label for="filter-color">Color</label>
-        <select id="filter-color">
-          <option value="">Todos</option>
-          <option value="rojo">Rojo</option>
-          <option value="negro">Negro</option>
-          <option value="blanco">Blanco</option>
+
+      <div class="filter-group">
+        <label for="inpCategory">Categoría</label>
+        <select id="inpCategory">
+          <option value="">-- Selecciona Categoría --</option>
+          <option value="Casuales">Casuales</option>
+          <option value="Deportivos">Deportivos</option>
+          <option value="Formales">Formales</option>
+          <option value="Sandalias">Sandalias</option>
+          <option value="Botas">Botas</option>
         </select>
       </div>
-      <div class="filter-item">
-        <label for="filter-precio">Precio Máx</label>
-        <input type="range" id="filter-precio" min="0" max="1000" value="1000" />
-        <span id="precio-valor">$0 - $1000</span>
+
+      <div class="filter-group">
+        <label for="inpPrecio">Precio Máximo</label>
+        <input type="range" id="inpPrecio" min="0" max="2000" value="2000" />
+        <span id="precioValor">$0 - $2000</span>
       </div>
-    </div>
+</div>
+
   </section>
 
   <!-- Catálogo -->
