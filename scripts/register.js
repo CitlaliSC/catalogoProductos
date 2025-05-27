@@ -42,7 +42,7 @@ btnRegister.addEventListener("click", async function (event) {
         });
 
         localStorage.setItem('userUID', user.uid);
-        window.location.href = "./html/dashboard.html";
+        window.location.href = "./dashboard.html";
     } catch (error) {
         alert(error.message);
     }
