@@ -8,7 +8,7 @@ const auth = getAuth(app);
 onAuthStateChanged(auth, user => {
   if (!user) {
     // No hay usuario autenticado, redirigir al login
-    window.location.href = "../index.html";
+    window.location.href = "./index.html";
   }
 });
 
