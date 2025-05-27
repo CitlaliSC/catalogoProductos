@@ -26,14 +26,14 @@ onAuthStateChanged(auth, async (user) => {
     const roles = userDoc.data().roles || {};
 
     // Siempre mostrar catálogo (rol por defecto)
-    crearBoton("Ir al Catálogo", "./html/catalogue.html");
+    crearBoton("Ir al Catálogo", "./catalogue.html");
 
     if (roles.adminProductos) {
-      crearBoton("Administrar Productos", "./html/adminProduct.html");
+      crearBoton("Administrar Productos", "./adminProduct.html");
     }
 
     if (roles.adminUsuarios) {
-      crearBoton("Administrar Usuarios", "./html/adminUsers.html");
+      crearBoton("Administrar Usuarios", "./adminUsers.html");
     }
 
   } catch (err) {
