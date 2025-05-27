@@ -18,7 +18,7 @@ btnLogin.addEventListener("click", async function (event) {
         const user = userCredential.user;
         localStorage.setItem('userUID', user.uid);
 
-        window.location.href = "../html/catalogue.html";
+        window.location.href = "../html/dashboard.html";
     } catch (error) {
         const errorMessage = error.message;
         alert(errorMessage);

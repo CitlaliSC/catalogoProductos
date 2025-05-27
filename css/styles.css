@@ -11,164 +11,52 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     color: #333;
-}
-
-/* ======================
-   ESTILOS GENERALES
-   ====================== */
-
-/* Header */
-.header {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 1rem 0;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 2rem;
-}
-
-.logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #667eea;
-}
-
-.nav-links {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-}
-
-.wishlist-btn {
-    background: #667eea;
-    color: white;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.wishlist-btn:hover {
-    background: #5a67d8;
-    transform: translateY(-2px);
-}
-
-.wishlist-count {
-    background: #ff6b6b;
-    color: white;
-    border-radius: 50%;
-    padding: 0.2rem 0.5rem;
-    font-size: 0.8rem;
-    min-width: 20px;
-    text-align: center;
-}
-
-/* ======================
-   ESTILOS LOGIN/REGISTER
-   ====================== */
-
-/* Main container para login */
-main {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    min-height: 100vh;
     padding: 2rem;
-    gap: 2rem;
 }
 
-/* Form section */
-.form-section {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(15px);
-    padding: 3rem;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    width: 100%;
-    max-width: 450px;
+/* Encabezado */
+h1 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Contenedor de botones */
+#opciones-usuario {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    transition: all 0.3s ease;
-}
-
-.form-section:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-}
-
-.form-section h2 {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 1rem;
-}
-
-.form-section label {
-    font-weight: 600;
-    color: #4a5568;
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
-}
-
-.form-section input {
-    padding: 1rem;
-    border: 2px solid rgba(102, 126, 234, 0.2);
-    border-radius: 12px;
-    font-size: 1rem;
-    outline: none;
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(5px);
-}
-
-.form-section input:focus {
-    border-color: #667eea;
+    width: 100%;
+    max-width: 400px;
     background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-    transform: translateY(-2px);
+    backdrop-filter: blur(15px);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.5s ease-in-out;
 }
 
-.form-section input:hover {
-    border-color: rgba(102, 126, 234, 0.4);
-}
-
-.form-section button {
+/* Botones */
+#opciones-usuario button {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
-    padding: 1rem 2rem;
+    padding: 1rem;
     border-radius: 12px;
     font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-top: 1rem;
     position: relative;
     overflow: hidden;
 }
 
-.form-section button::before {
+#opciones-usuario button::before {
     content: '';
     position: absolute;
     top: 0;
@@ -179,359 +67,37 @@ main {
     transition: left 0.5s;
 }
 
-.form-section button:hover::before {
+#opciones-usuario button:hover::before {
     left: 100%;
 }
 
-.form-section button:hover {
+#opciones-usuario button:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
 }
 
-.form-section button:active {
+#opciones-usuario button:active {
     transform: translateY(-1px);
 }
 
-/* Enlaces */
-main p {
-    text-align: center;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1rem;
-    font-weight: 500;
+/* Fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-main p a {
-    color: rgba(255, 255, 255, 1);
-    text-decoration: none;
-    font-weight: 700;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-main p a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: white;
-    transition: width 0.3s ease;
-}
-
-main p a:hover::after {
-    width: 100%;
-}
-
-main p a:hover {
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-}
-
-/* ======================
-   ESTILOS CATÁLOGO
-   ====================== */
-
-/* Main Container */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-
-/* Filters */
-.filters {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 1.5rem;
-    border-radius: 15px;
-    margin-bottom: 2rem;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-}
-
-.filters h3 {
-    margin-bottom: 1rem;
-    color: #667eea;
-}
-
-.filter-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    align-items: center;
-}
-
-.filter-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.filter-group label {
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-}
-
-.filter-group select,
-.filter-group input {
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    outline: none;
-    transition: border-color 0.3s ease;
-}
-
-.filter-group select:focus,
-.filter-group input:focus {
-    border-color: #667eea;
-}
-
-/* Product Grid */
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-.product-card {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.product-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-}
-
-.product-image {
-    width: 100%;
-    height: 250px;
-    background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-    color: #999;
-    position: relative;
-}
-
-.wishlist-heart {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: rgba(255, 255, 255, 0.9);
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1.2rem;
-}
-
-.wishlist-heart:hover {
-    background: white;
-    transform: scale(1.1);
-}
-
-.wishlist-heart.active {
-    color: #ff6b6b;
-}
-
-.product-info {
-    padding: 1.5rem;
-}
-
-.product-title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: #333;
-}
-
-.product-brand {
-    color: #667eea;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-}
-
-.product-price {
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: #2d3748;
-    margin-bottom: 1rem;
-}
-
-.product-details {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 1rem;
-}
-
-.view-details-btn {
-    width: 100%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
-    padding: 0.75rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.view-details-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-}
-
-/* Wishlist Modal */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 2000;
-}
-
-.modal-content {
-    background: white;
-    margin: 5% auto;
-    padding: 2rem;
-    border-radius: 15px;
-    max-width: 800px;
-    max-height: 80vh;
-    overflow-y: auto;
-    position: relative;
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #eee;
-}
-
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #999;
-}
-
-.close-btn:hover {
-    color: #333;
-}
-
-.wishlist-items {
-    display: grid;
-    gap: 1rem;
-}
-
-.wishlist-item {
-    display: flex;
-    gap: 1rem;
-    padding: 1rem;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    align-items: center;
-}
-
-.wishlist-item-image {
-    width: 80px;
-    height: 80px;
-    background: #f0f0f0;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #999;
-}
-
-.wishlist-item-info {
-    flex: 1;
-}
-
-.remove-wishlist-btn {
-    background: #ff6b6b;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.remove-wishlist-btn:hover {
-    background: #ff5252;
-}
-
-/* ======================
-   RESPONSIVE DESIGN
-   ====================== */
-
-@media (max-width: 768px) {
-    .nav-container {
-        padding: 0 1rem;
-    }
-
-    .container {
-        padding: 1rem;
-    }
-
-    .filter-row {
-        grid-template-columns: 1fr;
-    }
-
-    .products-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 1rem;
-    }
-
-    .modal-content {
-        margin: 10% 1rem;
-        padding: 1rem;
-    }
-
-    /* Login responsive */
-    main {
-        padding: 1rem;
-    }
-
-    .form-section {
-        padding: 2rem 1.5rem;
-        max-width: 100%;
-    }
-
-    .form-section h2 {
-        font-size: 1.8rem;
-    }
-}
-
+/* Responsive */
 @media (max-width: 480px) {
-    .form-section {
-        padding: 1.5rem 1rem;
+    h1 {
+        font-size: 2rem;
     }
 
-    .form-section h2 {
-        font-size: 1.6rem;
+    #opciones-usuario {
+        padding: 1.5rem;
     }
 
-    .form-section input,
-    .form-section button {
-        font-size: 0.95rem;
+    #opciones-usuario button {
+        font-size: 1rem;
+        padding: 0.9rem;
     }
 }
