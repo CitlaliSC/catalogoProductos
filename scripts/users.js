@@ -17,6 +17,7 @@ const userListDiv = document.getElementById("userList");
 const btnAddUser = document.getElementById("btnAddUser");
 const inpEmail = document.getElementById("inpEmail");
 const roleCheckboxes = document.querySelectorAll(".role-checkbox");
+const searchUserInput = document.getElementById("searchUserInput");
 
 // Estado local para usuarios cargados
 let users = [];
@@ -30,28 +31,38 @@ async function loadUsers() {
   querySnapshot.forEach(docSnap => {
     users.push({ id: docSnap.id, ...docSnap.data() });
   });
-  renderUserList();
+  renderUserList(users);
   clearForm();
 }
 
-// Renderiza la lista de usuarios en el DOM (con botones Editar y Eliminar)
-function renderUserList() {
-  if (users.length === 0) {
+// Renderiza la lista de usuarios (puede recibir lista filtrada)
+function renderUserList(usersToRender) {
+  if (!usersToRender || usersToRender.length === 0) {
     userListDiv.innerHTML = "<p>No hay usuarios registrados.</p>";
     return;
   }
 
   userListDiv.innerHTML = "";
 
-  users.forEach(user => {
+  usersToRender.forEach(user => {
     const userDiv = document.createElement("div");
     userDiv.className = "user-item";
     userDiv.style.border = "1px solid #ccc";
     userDiv.style.marginBottom = "10px";
     userDiv.style.padding = "10px";
+    userDiv.style.backgroundColor = "#f9f9f9";
+
+    // Mostrar roles en texto legible
+    const rolesList = user.roles 
+      ? Object.entries(user.roles)
+          .filter(([_, hasRole]) => hasRole)
+          .map(([role]) => role)
+          .join(", ")
+      : "Ninguno";
 
     userDiv.innerHTML = `
-      <p style="color:black;"><strong>Email:</strong> ${user.email}</p>
+      <p><strong>Email:</strong> ${user.email}</p>
+      <p><strong>Roles:</strong> ${rolesList}</p>
       <button class="edit-user-btn" data-userid="${user.id}">Editar</button>
       <button class="delete-user-btn" data-userid="${user.id}" style="margin-left:10px; background-color:#d9534f; color:white;">Eliminar</button>
     `;
@@ -59,7 +70,7 @@ function renderUserList() {
     userListDiv.appendChild(userDiv);
   });
 
-  // Asignar eventos a botones Editar
+  // Eventos botones Editar
   document.querySelectorAll(".edit-user-btn").forEach(btn => {
     btn.onclick = () => {
       const userId = btn.getAttribute("data-userid");
@@ -78,7 +89,7 @@ function renderUserList() {
     };
   });
 
-  // Asignar eventos a botones eliminar
+  // Eventos botones Eliminar
   document.querySelectorAll(".delete-user-btn").forEach(btn => {
     btn.onclick = async () => {
       const userId = btn.getAttribute("data-userid");
@@ -96,7 +107,7 @@ function renderUserList() {
   });
 }
 
-// Función para limpiar el formulario
+// Limpiar formulario
 function clearForm() {
   editingUserId = null;
   inpEmail.value = "";
@@ -105,7 +116,7 @@ function clearForm() {
   btnAddUser.textContent = "Actualizar Usuario";
 }
 
-// Función para manejar cambio o enter en el input email
+// Manejar cambio o enter en input email (para cargar usuario)
 function onEmailInputChange() {
   const email = inpEmail.value.trim().toLowerCase();
   if (!email) {
@@ -113,16 +124,14 @@ function onEmailInputChange() {
     return;
   }
 
-  // Buscar usuario por email
   const user = users.find(u => u.email.toLowerCase() === email);
   if (!user) {
     alert("Usuario no encontrado.");
     clearForm();
-    inpEmail.value = email; // para que quede el correo escrito
+    inpEmail.value = email; 
     return;
   }
 
-  // Si existe, cargar datos en el formulario
   editingUserId = user.id;
   inpEmail.disabled = true;
   roleCheckboxes.forEach(cb => {
@@ -131,13 +140,28 @@ function onEmailInputChange() {
   btnAddUser.textContent = "Actualizar Usuario";
 }
 
-// Eventos para el input email
+// Filtrar usuarios dinámicamente según texto búsqueda
+function filterUsers() {
+  const query = searchUserInput.value.trim().toLowerCase();
+  if (!query) {
+    renderUserList(users);
+    return;
+  }
+
+  const filtered = users.filter(u => u.email.toLowerCase().includes(query));
+  renderUserList(filtered);
+}
+
+// Eventos input email
 inpEmail.addEventListener("change", onEmailInputChange);
 inpEmail.addEventListener("keyup", (e) => {
   if (e.key === "Enter") onEmailInputChange();
 });
 
-// Botón para actualizar usuario
+// Evento input búsqueda usuarios
+searchUserInput.addEventListener("input", filterUsers);
+
+// Botón actualizar usuario
 btnAddUser.addEventListener("click", async () => {
   const email = inpEmail.value.trim().toLowerCase();
   if (!email) {
@@ -150,7 +174,6 @@ btnAddUser.addEventListener("click", async () => {
     return;
   }
 
-  // Obtener roles desde checkboxes
   const updatedRoles = {};
   roleCheckboxes.forEach(cb => {
     updatedRoles[cb.value] = cb.checked;
@@ -167,5 +190,5 @@ btnAddUser.addEventListener("click", async () => {
   }
 });
 
-// Al iniciar, carga usuarios
+// Cargar usuarios al iniciar
 loadUsers();

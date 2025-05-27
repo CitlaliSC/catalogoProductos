@@ -3,35 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Administrador de Usuarios</title>
-  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="icon" type="image/x-icon" href="../assets/logo.webp" />
+  <title>AdministradorUsuarios</title>
+  <link rel="stylesheet" href="/css/adminUsers.css" />
   <script type="module" src="../scripts/users.js"></script>
 </head>
 <body>
-
-<main>
+<h1>Administrador de Usuarios</h1>
+<main class="grid-layout">
   <section class="form-section" style="margin-bottom: 2rem;">
     <h2>Asignar permisos a un usuario</h2>
 
     <label for="inpEmail">Correo electrónico del usuario</label><br />
-    <input type="email" id="inpEmail" placeholder="usuario@ejemplo.com" style="width: 100%; max-width: 300px; margin-bottom: 1rem;" />
+    <input type="email" id="inpEmail" placeholder="usuario@ejemplo.com" />
 
     <label>Permisos</label><br />
-    <div class="roles-checkboxes" style="display:flex; gap:1rem; flex-wrap: wrap; margin-top: 0.5rem; margin-bottom: 1rem;">
+    <div class="roles-checkboxes">
       <label><input type="checkbox" class="role-checkbox" value="cliente" /> Cliente</label>
       <label><input type="checkbox" class="role-checkbox" value="adminProductos" /> Admin Productos</label>
       <label><input type="checkbox" class="role-checkbox" value="adminUsuarios" /> Admin Usuarios</label>
     </div>
 
-    <button id="btnAddUser" style="padding: 0.5rem 1rem;">Actualizar Usuario</button>
+    <button id="btnAddUser">Actualizar Usuario</button>
   </section>
 
   <section class="form-section">
     <h2>Usuarios</h2>
+
+    <input 
+      type="text" 
+      id="searchUserInput" 
+      placeholder="Buscar usuario por correo..." 
+      style="width: 100%; max-width: 400px; margin-bottom: 1rem; padding: 0.5rem;"
+    />
+
     <div id="userList">
       <!-- Aquí se mostrarán los usuarios -->
     </div>
   </section>
+
 </main>
 
 </body>
