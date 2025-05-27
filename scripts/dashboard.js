@@ -11,7 +11,7 @@ const contenedor = document.getElementById("opciones-usuario");
 
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
-    window.location.href = "../index.html";
+    window.location.href = "./index.html";
     return;
   }
 
@@ -26,14 +26,14 @@ onAuthStateChanged(auth, async (user) => {
     const roles = userDoc.data().roles || {};
 
     // Siempre mostrar catálogo (rol por defecto)
-    crearBoton("Ir al Catálogo", "../html/catalogue.html");
+    crearBoton("Ir al Catálogo", "./html/catalogue.html");
 
     if (roles.adminProductos) {
-      crearBoton("Administrar Productos", "../html/adminProduct.html");
+      crearBoton("Administrar Productos", "./html/adminProduct.html");
     }
 
     if (roles.adminUsuarios) {
-      crearBoton("Administrar Usuarios", "../html/adminUsers.html");
+      crearBoton("Administrar Usuarios", "./html/adminUsers.html");
     }
 
   } catch (err) {

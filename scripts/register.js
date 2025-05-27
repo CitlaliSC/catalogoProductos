@@ -42,7 +42,7 @@ btnRegister.addEventListener("click", async function (event) {
         });
 
         localStorage.setItem('userUID', user.uid);
-        window.location.href = "../html/catalogue.html";
+        window.location.href = "./html/catalogue.html";
     } catch (error) {
         alert(error.message);
     }
