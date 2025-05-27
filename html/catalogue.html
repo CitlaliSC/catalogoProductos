@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/x-icon" href="../assets/logo.webp" />
+  <title>Catálogo de Productos</title>
+  <link rel="stylesheet" href="../css/catalogue.css" />
+  <script src="https://kit.fontawesome.com/a2e0c6e6c6.js" crossorigin="anonymous"></script>
+  <!-- El script se carga al final del body para que el DOM ya esté listo -->
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <header class="header">
+    <div class="container header-container">
+      <h1 class="logo">Catálogo de zapatos</h1>
+      <div class="header-actions">
+        <span class="welcome-text">Bienvenido, Cliente</span>
+        <button class="add-to-wishlist wishlist-btn">
+          <i class="fas fa-heart"></i>
+          Wishlist
+          <span class="wishlist-count" id="wishlistCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Filtros -->
+  <section class="filters container">
+    <div class="filters-header">
+      <h2>Filtros</h2>
+      <input type="text" id="searchInput" placeholder="Buscar productos..." />
+    </div>
+    <div class="filter-grid">
+      <div class="filter-item">
+        <label for="filter-category">Categoría</label>
+        <select id="filter-category">
+          <option value="">Todas</option>
+          <option value="camisas">Camisas</option>
+          <option value="gorras">Gorras</option>
+          <option value="tazas">Tazas</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <label for="filter-color">Color</label>
+        <select id="filter-color">
+          <option value="">Todos</option>
+          <option value="rojo">Rojo</option>
+          <option value="negro">Negro</option>
+          <option value="blanco">Blanco</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <label for="filter-precio">Precio Máx</label>
+        <input type="range" id="filter-precio" min="0" max="1000" value="1000" />
+        <span id="precio-valor">$0 - $1000</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catálogo -->
+  <main class="container">
+    <div id="productsGrid" class="products-grid"></div>
+  </main>
+
+  <!-- Modal Wishlist -->
+  <div class="modal" id="wishlistModal" style="display:none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-heart"></i> Mi Wishlist</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="wishlist-items" id="wishlistItems">
+        <!-- Productos del wishlist se insertan aquí -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Script JS -->
+  <script type="module" src="../scripts/catalogue.js"></script>
+</body>
+</html>
