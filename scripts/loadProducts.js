@@ -1,5 +1,5 @@
 // load_products.js
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import {
   getFirestore,
   setDoc,
@@ -7,7 +7,7 @@ import {
   deleteDoc,
   getDocs,
   collection
-} from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
 import { firebaseConfig } from "./firebaseConfig.js";
 

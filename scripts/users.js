@@ -1,4 +1,4 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
 import {
   getFirestore,
   collection,
@@ -6,7 +6,7 @@ import {
   updateDoc,
   deleteDoc,
   doc
-} from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
 import { firebaseConfig } from "./firebaseConfig.js";
 import { setupLogout } from "./logout.js";
@@ -191,6 +191,7 @@ btnAddUser.addEventListener("click", async () => {
     alert("Error actualizando roles.");
   }
 });
+
 // Cargar usuarios al iniciar
 loadUsers();
 setupLogout();
