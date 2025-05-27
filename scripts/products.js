@@ -3,6 +3,7 @@ import {
   deleteProductFromFirestore,
   getProductsFromFirestore
 } from "./loadProducts.js";
+import { setupLogout } from "./logout.js";
 
 const inpName        = document.getElementById("inpName");
 const inpMarca       = document.getElementById("inpMarca");
@@ -187,3 +188,5 @@ window.onload = async () => {
   }
   await loadAndDisplayProducts();
 };
+
+setupLogout();

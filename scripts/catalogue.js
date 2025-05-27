@@ -14,6 +14,8 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
 
 import { firebaseConfig } from "./firebaseConfig.js";
+import { setupLogout } from "./logout.js";
+
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -233,3 +235,4 @@ document.addEventListener("DOMContentLoaded", async () => {
   updatePrecioValor();
   renderProducts(allProducts);
 });
+setupLogout();

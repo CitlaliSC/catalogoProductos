@@ -9,6 +9,8 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
 import { firebaseConfig } from "./firebaseConfig.js";
+import { setupLogout } from "./logout.js";
+
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -192,3 +194,4 @@ btnAddUser.addEventListener("click", async () => {
 
 // Cargar usuarios al iniciar
 loadUsers();
+setupLogout();

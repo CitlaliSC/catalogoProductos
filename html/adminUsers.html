@@ -9,10 +9,15 @@
   <script type="module" src="../scripts/users.js"></script>
 </head>
 <body>
-<h1>Administrador de Usuarios</h1>
+  <header style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; color: white;">
+    <h1>Administrador de Usuarios</h1>
+
+      <button id="logoutBtn" style="background-color: crimson; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">
+        Cerrar sesión
+      </button>
+    </header>
 <main class="grid-layout">
   <section class="form-section" style="margin-bottom: 2rem;">
-    <h2>Asignar permisos a un usuario</h2>
 
     <label for="inpEmail">Correo electrónico del usuario</label><br />
     <input type="email" id="inpEmail" placeholder="usuario@ejemplo.com" />

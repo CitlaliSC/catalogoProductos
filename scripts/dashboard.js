@@ -2,6 +2,7 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
 import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
 import { firebaseConfig } from "./firebaseConfig.js";
+import { setupLogout } from "./logout.js";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -11,7 +12,7 @@ const contenedor = document.getElementById("opciones-usuario");
 
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
-    window.location.href = "./index.html";
+    window.location.href = "../index.html";
     return;
   }
 
@@ -54,3 +55,4 @@ function crearBoton(texto, enlace) {
   btn.style.cursor = "pointer";
   contenedor.appendChild(btn);
 }
+setupLogout();
