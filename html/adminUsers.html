@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Administrador de Usuarios</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <script type="module" src="../scripts/users.js"></script>
+</head>
+<body>
+
+<main>
+  <section class="form-section" style="margin-bottom: 2rem;">
+    <h2>Asignar permisos a un usuario</h2>
+
+    <label for="inpEmail">Correo electrónico del usuario</label><br />
+    <input type="email" id="inpEmail" placeholder="usuario@ejemplo.com" style="width: 100%; max-width: 300px; margin-bottom: 1rem;" />
+
+    <label>Permisos</label><br />
+    <div class="roles-checkboxes" style="display:flex; gap:1rem; flex-wrap: wrap; margin-top: 0.5rem; margin-bottom: 1rem;">
+      <label><input type="checkbox" class="role-checkbox" value="cliente" /> Cliente</label>
+      <label><input type="checkbox" class="role-checkbox" value="adminProductos" /> Admin Productos</label>
+      <label><input type="checkbox" class="role-checkbox" value="adminUsuarios" /> Admin Usuarios</label>
+    </div>
+
+    <button id="btnAddUser" style="padding: 0.5rem 1rem;">Actualizar Usuario</button>
+  </section>
+
+  <section class="form-section">
+    <h2>Usuarios</h2>
+    <div id="userList">
+      <!-- Aquí se mostrarán los usuarios -->
+    </div>
+  </section>
+</main>
+
+</body>
+</html>
