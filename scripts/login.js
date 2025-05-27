@@ -14,6 +14,11 @@ btnLogin.addEventListener("click", async function (event) {
     const password = document.getElementById('password').value.trim();
 
     try {
+        // Ejecutar reCAPTCHA v3 antes del login
+        const token = await grecaptcha.execute('TU_SITE_KEY', { action: 'login' });
+
+        // Aquí podrías enviar el token a un backend para validarlo si tuvieras uno (opcional)
+
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
         localStorage.setItem('userUID', user.uid);
