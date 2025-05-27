@@ -1,4 +1,4 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
 import {
   getFirestore,
   collection,
@@ -6,7 +6,7 @@ import {
   updateDoc,
   deleteDoc,
   doc
-} from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
 
 import { firebaseConfig } from "./firebaseConfig.js";
 import { setupLogout } from "./logout.js";
@@ -191,14 +191,6 @@ btnAddUser.addEventListener("click", async () => {
     alert("Error actualizando roles.");
   }
 });
-
-window.onerror = function(message, source, lineno, colno, error) {
-    // No imprimes el error en la consola
-    // Puedes agregar tu lógica de manejo de errores aquí, como registrarlo en un servidor
-    // o simplemente ignorarlo.
-    return false; // Esto indica que el error fue manejado y no debe ser impreso en la consola
-};
-
 // Cargar usuarios al iniciar
 loadUsers();
 setupLogout();

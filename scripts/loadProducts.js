@@ -1,5 +1,5 @@
 // load_products.js
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
 import {
   getFirestore,
   setDoc,
@@ -7,7 +7,7 @@ import {
   deleteDoc,
   getDocs,
   collection
-} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
 
 import { firebaseConfig } from "./firebaseConfig.js";
 
@@ -45,10 +45,3 @@ export async function getProductsFromFirestore() {
   }
   return productsArray;
 }
-
-window.onerror = function(message, source, lineno, colno, error) {
-    // No imprimes el error en la consola
-    // Puedes agregar tu lógica de manejo de errores aquí, como registrarlo en un servidor
-    // o simplemente ignorarlo.
-    return false; // Esto indica que el error fue manejado y no debe ser impreso en la consola
-};
